@@ -1,0 +1,381 @@
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --color-fft-bg: #1a1814;
+  --color-fft-floor: #6b6358;
+  --color-fft-floor-light: #8a8278;
+  --color-fft-floor-dark: #4a443c;
+  --color-fft-parchment: #d9d4c3;
+  --color-fft-parchment-dark: #c4bfb0;
+  --color-fft-parchment-light: #ece8dc;
+  --color-fft-border: #3d3428;
+  --color-fft-border-light: #6b5d4a;
+  --color-fft-text: #1a1410;
+  --color-fft-text-dim: #5a5048;
+  --color-fft-hp: #2d8a2d;
+  --color-fft-hp-bar: #48b848;
+  --color-fft-mp: #208880;
+  --color-fft-mp-bar: #40b8a8;
+  --color-fft-ct: #c8a818;
+  --color-fft-ct-bar: #e8c830;
+  --color-fft-select: #f0e040;
+  --color-fft-select-glow: #ffff80;
+  --color-fft-orb: #4080c0;
+  --color-fft-menu-select: #ffffff;
+  --font-fft-ui: 'EB Garamond', Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-fft-ui);
+  background: var(--color-fft-bg);
+  color: var(--color-fft-text);
+  overflow: hidden;
+  image-rendering: pixelated;
+}
+
+.fft-window {
+  position: relative;
+  background:
+    linear-gradient(
+      180deg,
+      #eceadd 0%,
+      #ded9c8 35%,
+      #d0cab6 100%
+    );
+  border: 1px solid #1c1710;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55),
+    inset 0 0 0 3px var(--color-fft-border-light),
+    inset 0 0 0 4px rgba(255, 255, 255, 0.25),
+    0 3px 0 rgba(0, 0, 0, 0.25),
+    3px 5px 14px rgba(0, 0, 0, 0.5);
+}
+
+/* Ornamental corner rivets */
+.fft-window::before,
+.fft-window::after {
+  content: '';
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f4efdf, #8a7c60 70%, #4a4030);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+.fft-window::before {
+  top: 4px;
+  left: 4px;
+}
+
+.fft-window::after {
+  top: 4px;
+  right: 4px;
+}
+
+.fft-window-header {
+  position: relative;
+  background: linear-gradient(180deg, #cdc6b0 0%, #b8b09a 100%);
+  border-bottom: 1px solid var(--color-fft-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+}
+
+.fft-window-header > * {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.fft-menu-item {
+  transition:
+    background 0.08s ease,
+    color 0.08s ease;
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.fft-menu-item.selected {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+}
+
+.fft-ui-text {
+  font-family: var(--font-fft-ui);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.fft-ui-text-sm {
+  font-family: var(--font-fft-ui);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
+.fft-bar-track {
+  background: linear-gradient(180deg, #14100c 0%, #322a22 100%);
+  border: 1px solid #0e0b08;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.fft-bar-fill {
+  position: relative;
+  height: 100%;
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -2px 2px rgba(0, 0, 0, 0.35);
+}
+
+.fft-bar-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.18) 0,
+    rgba(0, 0, 0, 0.18) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  pointer-events: none;
+}
+
+.fft-bar-hp {
+  background: linear-gradient(180deg, #7fe07f 0%, #3faf3f 55%, #2c8a2c 100%);
+}
+
+.fft-bar-mp {
+  background: linear-gradient(180deg, #6fe0d4 0%, #33b0a4 55%, #1f8880 100%);
+}
+
+.fft-bar-ct {
+  background: linear-gradient(180deg, #ffe87a 0%, #e8c830 55%, #b89818 100%);
+}
+
+.fft-tab {
+  padding: 0.3rem 0.85rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  border-left: 1px solid rgba(255, 255, 255, 0.35);
+  background: linear-gradient(180deg, #cdc6b0 0%, #b4ac96 100%);
+  color: var(--color-fft-text-dim);
+  cursor: pointer;
+  font-family: var(--font-fft-ui);
+  font-size: 0.85rem;
+  transition: all 0.1s ease;
+}
+
+.fft-tab:hover {
+  color: var(--color-fft-text);
+}
+
+.fft-tab.active {
+  background: linear-gradient(180deg, #ffffff 0%, #ede8d8 100%);
+  color: var(--color-fft-text);
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--color-fft-select);
+}
+
+.fft-pill {
+  border-radius: 9999px;
+  background: linear-gradient(180deg, #d8d2c0 0%, #b8b09a 100%);
+  border: 1px solid var(--color-fft-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: all 0.1s ease;
+}
+
+.fft-pill:hover {
+  background: linear-gradient(180deg, #ece7d6 0%, #cec7b2 100%);
+}
+
+.fft-action-btn {
+  background: linear-gradient(180deg, #f0dca0 0%, #d8b858 55%, #b8942e 100%);
+  border: 1px solid #6a5320;
+  border-radius: 4px;
+  color: #2a2008;
+  font-weight: 700;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -2px 3px rgba(0, 0, 0, 0.25),
+    0 2px 4px rgba(0, 0, 0, 0.4);
+  transition: all 0.08s ease;
+}
+
+.fft-action-btn:hover:not(:disabled) {
+  background: linear-gradient(180deg, #fbecc0 0%, #e8ca78 55%, #c8a43e 100%);
+}
+
+.fft-action-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.fft-action-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.fft-floor {
+  background-color: #2a2620;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(/tiles/floor-sheet.png);
+  background-size:
+    cover,
+    192px 188px;
+  background-repeat: no-repeat, repeat;
+  image-rendering: pixelated;
+}
+
+.fft-pixelated {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+@keyframes fft-orb-pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.fft-orb {
+  animation: fft-orb-pulse 2s ease-in-out infinite;
+}
+
+@keyframes fft-select-pulse {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.fft-select-diamond {
+  animation: fft-select-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes fft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.fft-float {
+  animation: fft-float 1.1s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes fft-hit-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+.fft-hit-shake {
+  animation: fft-hit-shake 0.4s ease-in-out;
+}
+
+@keyframes fft-slash-pop {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(-12deg);
+    opacity: 0.4;
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(1.15) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.fft-slash-pop {
+  animation: fft-slash-pop 0.18s ease-out;
+}
+
+@keyframes fft-damage-float {
+  0% {
+    transform: translate(-50%, 0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -32px);
+    opacity: 0;
+  }
+}
+
+.fft-damage-float {
+  animation: fft-damage-float 1s ease-out forwards;
+  text-shadow:
+    0 0 3px rgba(0, 0, 0, 0.9),
+    1px 1px 0 #000;
+}
+
+@keyframes fft-screen-flash {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.fft-screen-flash {
+  animation: fft-screen-flash 0.3s ease-out forwards;
+}
