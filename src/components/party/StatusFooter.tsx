@@ -5,15 +5,18 @@ import { StatBar } from '../ui/StatBar'
 interface StatusFooterProps {
   member: PartyMember
   slotNumber: number
+  hpValue?: number
   onAttack?: () => void
 }
 
 export function StatusFooter({
   member,
   slotNumber,
+  hpValue,
   onAttack,
 }: StatusFooterProps) {
   const slotLabel = String(slotNumber + 1).padStart(2, '0')
+  const currentHp = hpValue ?? member.stats.hp.value
 
   return (
     <div className="flex flex-wrap gap-2 px-3 pb-3 pt-1 shrink-0 relative z-10">
@@ -30,7 +33,7 @@ export function StatusFooter({
               Lv.{member.level}
             </span>
           </div>
-          <StatBar type="hp" value={member.stats.hp.value} max={member.stats.hp.max} />
+          <StatBar type="hp" value={currentHp} max={member.stats.hp.max} />
           <StatBar type="mp" value={member.stats.mp.value} max={member.stats.mp.max} />
           <StatBar type="ct" value={member.stats.ct.value} max={member.stats.ct.max} />
         </div>

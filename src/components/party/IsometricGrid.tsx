@@ -11,6 +11,7 @@ interface IsometricGridProps {
   selectedIndex: number
   memberTabs?: Record<string, PartyTabId>
   actionStates?: Record<string, CharacterActionState>
+  hpValues?: Record<string, number>
   attackKey?: number
   slashCombo?: number
   damage?: number
@@ -22,16 +23,18 @@ function FloatingStat({
   member,
   activeTab,
   isDead,
+  hpValue,
 }: {
   member: PartyMember
   activeTab: PartyTabId
   isDead: boolean
+  hpValue: number
 }) {
   if (activeTab === 'hp') {
     return (
       <StatBar
         type="hp"
-        value={isDead ? 0 : member.stats.hp.value}
+        value={isDead ? 0 : hpValue}
         max={member.stats.hp.max}
         compact
       />
@@ -80,6 +83,7 @@ export function IsometricGrid({
   selectedIndex,
   memberTabs = {},
   actionStates = {},
+  hpValues = {},
   attackKey = 0,
   slashCombo,
   damage,
@@ -100,6 +104,7 @@ export function IsometricGrid({
           const actionState = actionStates[member.id] ?? 'idle'
           const isDead = actionState === 'dead'
           const activeTab = memberTabs[member.id] ?? 'hp'
+          const hpValue = hpValues[member.id] ?? member.stats.hp.value
 
           return (
             <button
@@ -148,6 +153,7 @@ export function IsometricGrid({
                         member={member}
                         activeTab={activeTab}
                         isDead={isDead}
+                        hpValue={hpValue}
                       />
                     </div>
                   </motion.div>

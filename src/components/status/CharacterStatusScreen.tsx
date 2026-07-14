@@ -198,13 +198,9 @@ export function CharacterStatusScreen({
         </div>
       </div>
 
-      <div className="absolute bottom-8 right-20 pointer-events-none z-0">
+      <div className="absolute bottom-8 right-8 pointer-events-none z-0">
         <div className="relative w-24 flex flex-col items-center">
-          <svg viewBox="0 0 64 32" className="w-20 h-10 opacity-80" aria-hidden="true">
-            <polygon points="32,4 58,16 32,28 6,16" fill="#7a7060" stroke="#4a4038" strokeWidth="1" />
-            <polygon points="32,8 52,16 32,24 12,16" fill="#8a8070" stroke="#5a5048" strokeWidth="0.5" />
-          </svg>
-          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 scale-150 flex justify-center">
+          <div className="scale-150 flex justify-center">
             <CharacterSprite member={member} />
           </div>
         </div>
