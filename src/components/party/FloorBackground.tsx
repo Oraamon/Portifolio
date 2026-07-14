@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
-const SHEET_URL = '/tiles/floor-sheet.png'
+import { asset } from '../../utils/assets'
+
+const SHEET_URL = asset('tiles/floor-sheet.png')
 const TILES_X = 3
 const TILES_Y = 3
 const SRC_TILE_W = 160

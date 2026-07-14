@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { PartyMember } from '../../types/portfolio'
+import { asset } from '../../utils/assets'
 import { slashComboFromKey, SlashEffect } from './SlashEffect'
 
 export type CharacterActionState = 'idle' | 'slash' | 'weak' | 'dead'
@@ -19,30 +20,30 @@ interface CharacterAsset {
 
 function rotationFrames(folder: string, prefix: string): SpriteFrame[] {
   return [
-    { src: `${folder}/${prefix}-S.png` },
-    { src: `${folder}/${prefix}-SW.png` },
-    { src: `${folder}/${prefix}-W.png` },
-    { src: `${folder}/${prefix}-NW.png` },
-    { src: `${folder}/${prefix}-N.png` },
-    { src: `${folder}/${prefix}-NW.png`, flip: true },
-    { src: `${folder}/${prefix}-W.png`, flip: true },
-    { src: `${folder}/${prefix}-SW.png`, flip: true },
+    { src: asset(`${folder}/${prefix}-S.png`) },
+    { src: asset(`${folder}/${prefix}-SW.png`) },
+    { src: asset(`${folder}/${prefix}-W.png`) },
+    { src: asset(`${folder}/${prefix}-NW.png`) },
+    { src: asset(`${folder}/${prefix}-N.png`) },
+    { src: asset(`${folder}/${prefix}-NW.png`), flip: true },
+    { src: asset(`${folder}/${prefix}-W.png`), flip: true },
+    { src: asset(`${folder}/${prefix}-SW.png`), flip: true },
   ]
 }
 
 const characterAssets: Record<string, CharacterAsset> = {
   ramza: {
-    frames: rotationFrames('/sprites/characters/mime', 'Mime3F'),
-    weak: '/sprites/characters/mime/Mime3F-Weak-SW.png',
-    dead: '/sprites/characters/mime/Mime3F-Dead-SW.png',
-    portrait: '/sprites/characters/mime/Mime3F.png',
+    frames: rotationFrames('sprites/characters/mime', 'Mime3F'),
+    weak: asset('sprites/characters/mime/Mime3F-Weak-SW.png'),
+    dead: asset('sprites/characters/mime/Mime3F-Dead-SW.png'),
+    portrait: asset('sprites/characters/mime/Mime3F.png'),
     alt: 'Mime',
   },
   agrias: {
-    frames: rotationFrames('/sprites/characters/black-chocobo', 'BlackChocobo'),
-    weak: '/sprites/characters/black-chocobo/BlackChocobo-Weak-SW.png',
-    dead: '/sprites/characters/black-chocobo/BlackChocobo-Dead-SW.png',
-    portrait: '/sprites/characters/black-chocobo/BlackChocobo.png',
+    frames: rotationFrames('sprites/characters/black-chocobo', 'BlackChocobo'),
+    weak: asset('sprites/characters/black-chocobo/BlackChocobo-Weak-SW.png'),
+    dead: asset('sprites/characters/black-chocobo/BlackChocobo-Dead-SW.png'),
+    portrait: asset('sprites/characters/black-chocobo/BlackChocobo.png'),
     alt: 'Black Chocobo',
   },
 }

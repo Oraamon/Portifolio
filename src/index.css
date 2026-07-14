@@ -243,7 +243,7 @@ body {
   background-color: #2a2620;
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-    url(/tiles/floor-sheet.png);
+    var(--fft-floor-sheet, url(/tiles/floor-sheet.png));
   background-size:
     cover,
     192px 188px;

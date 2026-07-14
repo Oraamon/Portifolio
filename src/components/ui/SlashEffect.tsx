@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { asset } from '../../utils/assets'
 
 type SlashStyle = 1 | 2 | 3
 type SlashColor = 1 | 2 | 3 | 4 | 5
@@ -58,7 +59,9 @@ export function SlashEffect({ combo = 0, damage }: SlashEffectProps) {
 
   const file = `${config.prefix}${color}_frame${frame}.png`
   const path = (size: string) =>
-    `/sprites/effects/slash/${size}/${encodeURIComponent(config.folder)}/color${color}/${config.framesDir}/${file}`
+    asset(
+      `sprites/effects/slash/${size}/${encodeURIComponent(config.folder)}/color${color}/${config.framesDir}/${file}`,
+    )
 
   return (
     <>

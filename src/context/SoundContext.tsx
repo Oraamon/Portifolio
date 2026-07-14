@@ -8,6 +8,7 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { asset } from '../utils/assets'
 
 interface SoundContextValue {
   musicEnabled: boolean
@@ -21,7 +22,7 @@ interface SoundContextValue {
 
 const SoundContext = createContext<SoundContextValue | null>(null)
 
-const MUSIC_SRC = '/audio/say-so-instrumental.mp3'
+const MUSIC_SRC = asset('audio/say-so-instrumental.mp3')
 
 function createTone(frequency: number, duration: number, volume = 0.15): Howl {
   return new Howl({
